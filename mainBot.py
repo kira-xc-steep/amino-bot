@@ -66,6 +66,8 @@ def on_message(data):
 		sub_client.join_chat(chatId=chatInfo.chatId)
 		x=client.get_from_code(str(content[1])).objectId
 		sub_client.invite_to_chat([x], chatId=chatInfo.chatId)
+        if content[0] == "!chatId":
+		sub_client.send_message(message=(f"Айди этого чата: {chatId}"), chatId=chatId, replyTo=id)
 	if content[0] == "!зачистка-100":
 	           if data.message.author.role != 0:
 	               for msgId in sub_client.get_chat_messages(chatId=data.message.chatId, size=100).messageId:
