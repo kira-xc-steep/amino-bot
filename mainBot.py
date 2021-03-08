@@ -30,7 +30,24 @@ def socketDelay():
             j = 0
         j += 1
         time.sleep(1)
-        
+
+def on_message(data):
+	global ban
+	global tim
+	global nom
+	chatId = data.message.chatId
+	nickname = data.message.author.nickname
+	content = data.message.content
+	vrem = data.message.createdTime[17:19]
+	id = data.message.messageId
+	
+	print(f"# Log: {nickname}: {content}: {chatId} : {ban}: {data.message.type}")
+
+        content = str(content).split(" ")
+	if content[0][0] == "!" and content[0][1:].lower() == "хелп":
+		sub_client.send_message(message="Help(beta): !test", chatId=chatId, replyTo=id) 
+        if content[0] == "!ping":
+                sub_client.send_message(message"Ping!", chatId=chatId, replyTo=id) 
                 
 methods = []
 for x in client.callbacks.chat_methods:
