@@ -144,16 +144,6 @@ def on_message(data):
 	               	
 	if content[0][0] == "!" and content[0][1:].lower() == "on":
 		tim = -tim
-		
-	##################################хелоу нигер#################################################
-	def on_group_member_join(data):
-		nick = data.message.author.nickname
-		msg = {
-		'message': f"{join}\n\n[CB]{nick} привет нигерс",
-		'chatId': data.message.chatId,
-		'mentionUserIds': [data.message.author.userId]
-		}
-		sub.send_message(**msg)
 	
         ##################################Защита чата##################################################
 
