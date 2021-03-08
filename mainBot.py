@@ -25,15 +25,6 @@ hm = [0]
 av = []
 nom = 0
 
-join = """хелоу нигер"""
-
-def on_group_member_join(data):
-		nick = data.message.author.nickname
-		msg = {
-		'message': f"{join}\n\n[CB]{nick} привет нигерс", 'chatId': data.message.chatId, 'mentionUserIds': [data.message.author.userId]
-		}
-		sub.send_message(**msg)
-
 def socketDelay():
     j = 0
     while True:
