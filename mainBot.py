@@ -46,9 +46,13 @@ def on_message(data):
 
         content = str(content).split(" ")
 	if content[0][0] == "!" and content[0][1:].lower() == "хелп":
-		sub_client.send_message(message="Help(beta): !test", chatId=chatId, replyTo=id) 
+		sub_client.send_message(message="Help(beta): !test", chatId=chatId, replyTo=id)
         if content[0] == "!ping":
-                sub_client.send_message(message"Ping!", chatId=chatId, replyTo=id) 
+                sub_client.send_message(message"Ping!", chatId=chatId, replyTo=id)
+	if content[0] == "!online-status":
+		subclient.activity_status('online') #бесполезная команда
+	if content[0] == "!offline-status":
+		subclient.activity_status('offline')
                 
 methods = []
 for x in client.callbacks.chat_methods:
