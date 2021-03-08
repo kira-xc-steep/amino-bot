@@ -62,9 +62,9 @@ def on_message(data):
 	if content[0] == "!ping":
                 sub_client.send_message(message="Ping!", chatId=chatId, replyTo=id)
 	if content[0] == "!online-status":
-		subclient.activity_status('online') #бесполезная команда
+		sub_client.activity_status('online') #бесполезная команда
 	if content[0] == "!offline-status":
-		subclient.activity_status('offline')
+		sub_client.activity_status('offline')
 	if content[0] == "!say":
 		sub_client.send_message(message=(f"{data.message.content[4:]}"), chatId=chatId) # Тоже бесполезная команда. 
 	if content[0] == "имя_бота":
