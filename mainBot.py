@@ -57,6 +57,12 @@ def on_message(data):
 		sub_client.send_message(message=(f"{data.message.content[4:]}"), chatId=chatId) # Тоже бесполезная команда. 
 	if content[0] == "whoname00":
 		sub_client.send_message(message=(f"Звали, {nickname}?"), chatId=chatId, replyTo=id)  # Зовëт бота. :/
+	if content[0][1:].lower()=="!inv":
+		sub_client.join_chat(chatId=chatInfo.chatId)
+		x=client.get_from_code(str(content[1])).objectId
+		sub_client.invite_to_chat([x], chatId=chatInfo.chatId)
+	if content[0] == "!chatId":
+		sub_client.send_message(message=(f"айди этого чата: {chatId}"), chatId=chatId, replyTo=id)
 
 methods = []
 for x in client.callbacks.chat_methods:
