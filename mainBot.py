@@ -53,7 +53,11 @@ def on_message(data):
 		subclient.activity_status('online') #бесполезная команда
 	if content[0] == "!offline-status":
 		subclient.activity_status('offline')
-                
+        if content[0] == "!say":
+		sub_client.send_message(message=(f"{data.message.content[4:]}"), chatId=chatId) # Тоже бесполезная команда. 
+	if content[0] == "whoname00":
+		sub_client.send_message(message=(f"Звали, {nickname}?"), chatId=chatId, replyTo=id)  # Зовëт бота. :/
+
 methods = []
 for x in client.callbacks.chat_methods:
 	methods.append(client.callbacks.event(client.callbacks.chat_methods[x].__name__)(on_message))
