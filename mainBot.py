@@ -48,44 +48,44 @@ def on_message(data):
 	id = data.message.messageId
 	
 	print(f"# Log: {nickname}: {content}: {chatId} : {ban}: {data.message.type}") # Выводит сообщение в консоль. 
-
-        randomnumb = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31', '32', '33', '34', '35', '36', '37', '38', '39', '40', '41', '42', '43', '44', '45', '46', '47', '48', '49', '50', '51', '52', '53', '54', '55', '56', '57', '58', '59', '60', '61', '62', '63', '64', '65', '66', '67', '68', '69', '70', '71', '72', '73', '74', '75', '76', '77', '78', '79', '80', '81', '82', '83', '84', '85', '86', '87', '88', '89', '90', '91', '92', '93', '94', '95', '96', '97', '98', '99', '100'] # рандом число
-
-        content = str(content).split(" ")
+	
+	randomnumb = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31', '32', '33', '34', '35', '36', '37', '38', '39', '40', '41', '42', '43', '44', '45', '46', '47', '48', '49', '50', '51', '52', '53', '54', '55', '56', '57', '58', '59', '60', '61', '62', '63', '64', '65', '66', '67', '68', '69', '70', '71', '72', '73', '74', '75', '76', '77', '78', '79', '80', '81', '82', '83', '84', '85', '86', '87', '88', '89', '90', '91', '92', '93', '94', '95', '96', '97', '98', '99', '100'] # рандом число
+	
+	content = str(content).split(" ")
 	if content[0][0] == "!" and content[0][1:].lower() == "хелп":
 		sub_client.send_message(message="Help(beta): !test", chatId=chatId, replyTo=id)
-        if content[0] == "!гс":
+	if content[0] == "!гс":
 		myobj = gTTS(text=data.message.content[4:], lang='ru', slow=False)
 		myobj.save("gs.mp3")
 		with open("gs.mp3", "rb") as file:
 			sub_client.send_message(chatId=chatId, file=file, fileType="audio")
-        if content[0] == "!ping":
-                sub_client.send_message(message"Ping!", chatId=chatId, replyTo=id)
+	if content[0] == "!ping":
+                sub_client.send_message(message="Ping!", chatId=chatId, replyTo=id)
 	if content[0] == "!online-status":
 		subclient.activity_status('online') #бесполезная команда
 	if content[0] == "!offline-status":
 		subclient.activity_status('offline')
-        if content[0] == "!say":
+	if content[0] == "!say":
 		sub_client.send_message(message=(f"{data.message.content[4:]}"), chatId=chatId) # Тоже бесполезная команда. 
 	if content[0] == "имя_бота":
 		sub_client.send_message(message=(f"Звали, {nickname}?"), chatId=chatId, replyTo=id)  # Зовëт бота. :/
-        if content[0][1:].lower()=="!inv":
+	if content[0][1:].lower()=="!inv":
 		sub_client.join_chat(chatId=chatInfo.chatId)
 		x=client.get_from_code(str(content[1])).objectId
 		sub_client.invite_to_chat([x], chatId=chatInfo.chatId)
-        if content[0] == "!chatId":
+	if content[0] == "!chatId":
 		sub_client.send_message(message=(f"Айди этого чата: {chatId}"), chatId=chatId, replyTo=id)
-        if content[0] == "!code":
+	if content[0] == "!code":
 		sub_client.send_message(message="[BC][💳]Коды из цифр\n\n[C]Что это? А это — пасхальные коды, если собрать интересную комбинацию из !randomnumber то, вы получите какой-то секрет из бота. Пример, как их вводить: !code<цифры>", chatId=chatId, replyTo=id)
-        if content[0] == "!code<цифры>":
+	if content[0] == "!code<цифры>":
 		sub_client.send_message(message=f"[BC][🚄]Предупреждение\n\n[C]Дорогой юзер, чтобы получить код, нужно ввести !randomnumber и из цифр, соберите комбинацию.", chatId=chatId, replyTo=id)
-        if content[0][0] == "!" and content[0][1:].lower() == "code10046771213158262":
+	if content[0][0] == "!" and content[0][1:].lower() == "code10046771213158262":
 	  	sub_client.send_message(message='!гс Вася топ чел!', chatId=chatId, replyTo=id)
 	if content[0][0] == "!" and content[0][1:].lower() == "code63498794405073559":
 	  	sub_client.send_message(message=f'{nickname} Ты крутой!', chatId=chatId, replyTo=id)
 	if content[0] == "!code50999291251433077":
 		sub_client.send_message(message="Nsercet", chatId=chatId)
-        if content[0] == "Nsercet":
+	if content[0] == "Nsercet":
 		myobj = gTTS(text=data.message.content[4:], lang='ru', slow=False)
 		myobj.save("gs.mp3")
 		with open("gs.mp3", "rb") as file:
@@ -100,8 +100,8 @@ def on_message(data):
 	           if data.message.author.role != 0:
 	               for msgId in sub_client.get_chat_messages(chatId=data.message.chatId, size=100).messageId:
 	               	sub_client.delete_message(reason="зачистка", chatId=data.message.chatId, messageId=msgId, asStaff=True) # Зачистка чата например от спама, нужен лидер, либо стоит "asStaff=True", "reason=зачистка"
-        
-        if content[0][0] == "!" and content[0][1:].lower() == "on":
+	               	
+	if content[0][0] == "!" and content[0][1:].lower() == "on":
 		tim = -tim
 	
         ##################################Защита чата##################################################
