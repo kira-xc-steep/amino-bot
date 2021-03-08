@@ -14,8 +14,9 @@
 2. Создаëм  bat file назовëм для примера: ```name.bat```
 3. Изменяем его, при помощи кнопки мыши и жмëм на "Изменить", затем пишем такое как на примере:
 
-@echo off
-python C:/Desktop/scripts/main.py
-pause>nul
+-@echo off
+-python C:/Desktop/scripts/main.py
+-pause>nul
+(Эти "-" убираем). 
 
 4. Запускаем и готово! 
