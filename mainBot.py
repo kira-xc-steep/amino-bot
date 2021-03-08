@@ -1,9 +1,6 @@
 # Я просто напишу импорт библиотеки, и вход в бота, а дальше фантазия придумает.
 # Логи добавлены и команды.
 
-# Пофиксил строку от админ панели. 
-# Жду, когда онао подготовится. 
-
 import amino
 import random
 import datetime
@@ -52,7 +49,9 @@ def on_message(data):
 	
 	print(f"# Log: {nickname}: {content}: {chatId} : {ban}: {data.message.type}") # Выводит сообщение в консоль. 
 	
+	lis = ['🌠 - Думаю, да', '🌠 - Думаю что нет', '🌠 - Нет.', '🌠 - Не знаю, сам думай', '🌠 - Да.', '🌠 - Сложный вопросик конечно.', '🌠 - Повтори вопрос.', '🌠 - Ты уверен, что хочешь этого знать?', '🌠 - Не знаю.', '🌠 - Гляжу у себя в голове, а думать не в состоянии', '🌠 - Отрицаю.', '🌠 - Не согласен с вашим вопросом.', '🌠 - Посмотри в интернете ответы, или же у Яндекс Алисы спроси'] # команда вопроса
 	randomnumb = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31', '32', '33', '34', '35', '36', '37', '38', '39', '40', '41', '42', '43', '44', '45', '46', '47', '48', '49', '50', '51', '52', '53', '54', '55', '56', '57', '58', '59', '60', '61', '62', '63', '64', '65', '66', '67', '68', '69', '70', '71', '72', '73', '74', '75', '76', '77', '78', '79', '80', '81', '82', '83', '84', '85', '86', '87', '88', '89', '90', '91', '92', '93', '94', '95', '96', '97', '98', '99', '100'] # рандом число
+	gayper = ['🏳‍🌈 Вы гей/лесбиянка на: 0%', '🏳‍🌈 Вы гей/лесбиянка на: 0.5%', '🏳‍🌈 Вы гей/лесбиянка на: 1%', '🏳‍🌈 Вы гей/лесбиянка на: 2.56%', '🏳‍🌈 Вы гей/лесбиянка на: 3%', '🏳‍🌈 Вы гей/лесбиянка на: 5%', '🏳‍🌈 Вы гей/лесбиянка на: 13.45%', '🏳‍🌈 Вы гей/лесбиянка на: 23.75%', '🏳‍🌈 Вы гей/лесбиянка на: 35.93%', '🏳‍🌈 Вы гей/лесбиянка на: 41.99%', '🏳‍🌈 Вы гей/лесбиянка на: 49%', '🏳‍🌈 Вы гей/лесбиянка на: 69.34%', '🏳‍🌈 Вы гей/лесбиянка на: 79.33%', '🏳‍🌈 Вы гей/лесбиянка на: 95.55%', '🏳‍🌈 Вы гей/лесбиянка на: 100%'] # гей тест
 	
 	content = str(content).split(" ")
 	if content[0][0] == "!" and content[0][1:].lower() == "хелп":
@@ -64,8 +63,13 @@ def on_message(data):
 			sub_client.send_message(chatId=chatId, file=file, fileType="audio")
 	if content[0] == "!ping":
                 sub_client.send_message(message="Ping!", chatId=chatId, replyTo=id)
+	if content[0][0] == "?":
+		sub_client.send_message(message=str(random.choice(lis)), chatId=chatId, replyTo=id)
 	if content[0] == "!adpanel":
-		sub_client.send_message(message="[BC][💻]Админ панель\n[C]1. !зачистка-100 — Удаляет 100 сообщении, но нужен лидер\n[C]2. !night — Пожелать участникам спокойной ночи.\n[C]3. !morn — Пожелать доброго утро участникам.\n[C]4. !chatId — Узнать айди данного чата, в котором вы находитесь.\n[C]5. !save — Сохранить чат.\n[C]6. !loadsave — Загрузить сохранëнный чат, но нужен помощник.\n7. !online-status, !offline-status — Изменить статус боту.", chatId=chatId, replyTo=id)
+		sub_client.send_message(message="[BC][💻]Админ панель\n[C]1. !зачистка-100 — Удаляет 100 сообщении, но нужен лидер\n[C]2. !night — Пожелать участникам спокойной ночи.\n[C]3. !morn — Пожелать доброго утро участникам.\n[C]4. !chatId — Узнать айди данного чата, в котором вы находитесь.\n[C]5. !save — Сохранить чат.\n[C]6. !loadsave — Загрузить сохранëнный чат, но нужен помощник.\n7. !online-status, !offline-status — Изменить статус боту.\n8. !кикнименя — Бот вас с радостью ëбнет с чата, если напишите эту команду. :)", chatId=chatId, replyTo=id)
+	if content[0] == "!кикнименя":
+		sub_client.send_message(message=f"Кикнул вас, {nickname}", chatId=chatId, replyTo=id)
+		sub_client.kick(userId=data.message.author.userId, chatId=data.message.chatId, allowRejoin = True)
 	if content[0] == "!night":
 		sub_client.send_message(message="Спокойной всем ночи.", chatId=chatId)
 	if content[0] == "!morn":
@@ -78,6 +82,30 @@ def on_message(data):
 		sub_client.send_message(message=(f"{data.message.content[4:]}"), chatId=chatId) # Тоже бесполезная команда. 
 	if content[0] == "имя_бота":
 		sub_client.send_message(message=(f"Звали, {nickname}?"), chatId=chatId, replyTo=id)  # Зовëт бота. :/
+	if content[0] == "Привет":
+		sub_client.send_message(message='И тебе привет', chatId=chatId, replyTo=id)
+	if content[0] == "привет":
+		sub_client.send_message(message='И тебе привет', chatId=chatId, replyTo=id)
+	if content[0] == "Дарова":
+		sub_client.send_message(message='И тебе привет', chatId=chatId, replyTo=id)
+	if content[0] == "Дратути.":
+		sub_client.send_message(message='И тебе привет', chatId=chatId, replyTo=id)
+	if content[0] == "Дратути":
+		sub_client.send_message(message='И тебе привет', chatId=chatId, replyTo=id)
+	if content[0] == "дратути":
+		sub_client.send_message(message='И тебе привет', chatId=chatId, replyTo=id)
+	if content[0] == "Приветствую.":
+		sub_client.send_message(message='И тебя приветствую', chatId=chatId, replyTo=id)
+	if content[0] == "Приветствую":
+		sub_client.send_message(message='И тебя приветствую', chatId=chatId, replyTo=id)
+	if content[0] == "приветствую":
+		sub_client.send_message(message='И тебя приветствую', chatId=chatId, replyTo=id)
+	if content[0] == "Здраствуйте.":
+		sub_client.send_message(message='И тебя приветствую', chatId=chatId, replyTo=id)
+	if content[0] == "Здраствуйте":
+		sub_client.send_message(message='И тебя приветствую', chatId=chatId, replyTo=id)
+	if content[0] == "здраствуйте":
+		sub_client.send_message(message='И тебя приветствую', chatId=chatId, replyTo=id)
 	if content[0][1:].lower()=="!inv":
 		sub_client.join_chat(chatId=chatInfo.chatId)
 		x=client.get_from_code(str(content[1])).objectId
@@ -105,6 +133,10 @@ def on_message(data):
 		sub_client.send_message(message="Люблю есть КФС.", chatId=chatId)
 	if content[0] == "!code96877830231156515":
 		sub_client.send_message(message=f"{nickname} Боты не живые материи. Боты — роботы, которые выполняют команды, для обслуживание и прочее.", chatId=chatId)
+	if content[0] == "!saycontent":
+		sub_client.send_message(message=(f"{nickname}: {content}"), chatId=chatId) # Команда, но с контексным сообщением.
+	if content[0] == "!infobot":
+		sub_client.send_message(message='[BC][📄]Информация о боте\n[C]Создатели бота: Vasyajopa228, onaosuperpro2015, whoname01\n[C]Версия бота: 0.8', chatId=chatId, replyTo=id)
 	if content[0] == "!зачистка-100":
 	           if data.message.author.role != 0:
 	               for msgId in sub_client.get_chat_messages(chatId=data.message.chatId, size=100).messageId:
@@ -138,6 +170,9 @@ def on_message(data):
 			
 	if data.message.content != None and data.message.type in [1, 50, 57, 59, 100, 101, 102, 103, 104, 105, 106, 107, 109, 110, 113, 114, 115, 116, 124, 125, 126]:
 		sub_client.send_message(message=(f'Рейдер {nickname} был кикнут из чата навсегда.'), chatId=data.message.chatId)
+		sub_client.kick(userId=data.message.author.userId, chatId=data.message.chatId, allowRejoin = False)
+	if data.message.type == 101 and nom == 0 and data.message.content == None:
+		sub_client.send_message(message='{nickname} пытался зарейдить.', chatId=data.message.chatId)
 		sub_client.kick(userId=data.message.author.userId, chatId=data.message.chatId, allowRejoin = False)
 		nom = 0
 
