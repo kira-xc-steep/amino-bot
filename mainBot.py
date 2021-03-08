@@ -61,6 +61,12 @@ def on_message(data):
 			sub_client.send_message(chatId=chatId, file=file, fileType="audio")
 	if content[0] == "!ping":
                 sub_client.send_message(message="Ping!", chatId=chatId, replyTo=id)
+    if content[0] == "!adpanel":
+		sub_client.send_message(message="[BC][💻]Админ панель\n[C]1. !зачистка-100 — Удаляет 100 сообщении, но нужен лидер\n[C]2. !night — Пожелать участникам спокойной ночи.\n[C]3. !morn — Пожелать доброго утро участникам.\n[C]4. !chatId — Узнать айди данного чата, в котором вы находитесь.\n[C]5. !save — Сохранить чат.\n[C]6. !loadsave — Загрузить сохранëнный чат, но нужен помощник.\n7. !online-status, !offline-status — Изменить статус боту.", chatId=chatId, replyTo=id)
+	if content[0] == "!night":
+		sub_client.send_message(message="Спокойной всем ночи.", chatId=chatId)
+	if content[0] == "!morn":
+		sub_client.send_message(message="Доброе всем утро.", chatId=chatId)
 	if content[0] == "!online-status":
 		sub_client.activity_status('online') #бесполезная команда
 	if content[0] == "!offline-status":
