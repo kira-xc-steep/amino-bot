@@ -1,6 +1,10 @@
 # Я просто напишу импорт библиотеки, и вход в бота, а дальше фантазия придумает.
 # Логи добавлены и команды.
 
+# Update log:
+	# Сделано под 1.2.13 амино.пай версии
+	# Добавил текст для измены статуса, чтобы бот сообщал.
+
 import amino
 import random
 import datetime
@@ -15,10 +19,12 @@ from io import BytesIO
 from getpass import getpass
 
 client = amino.Client()
-client.login(email="email", password="password") #вводим пароль и почту от аккаунта бота
+client.login(email="whoname05@gmail.com", password="12345qwert") #вводим пароль и почту от аккаунта бота
 sub_client = amino.SubClient(comId='194234106', profile=client.profile) #вместо "id" введите айди сообщества, в котором будет работать чат
 print('Bot status: True! Bot was login')
-time.sleep(1) # Пишет это хуйня, когда бот зашëл на аккаунт. 
+time.sleep(1) # Пишет это хуйня, когда бот зашëл на аккаунт.
+print(' ')
+time.sleep(1)
 ban = 0
 tim = 1
 hm = [0]
@@ -55,7 +61,7 @@ def on_message(data):
 	
 	content = str(content).split(" ")
 	if content[0][0] == "!" and content[0][1:].lower() == "хелп":
-		sub_client.send_message(message="Help(beta): !test", chatId=chatId, replyTo=id)
+		sub_client.send_message(message="[C]0. !гс — Делает из текста в гс.\n[C]1. !ping — Бот сообщает, что он работает.\n[C]2. !adpanel — Ну тут итак понятно.\n[C]3. !кикнименя — Нужна роль помощника, чтобы бот кикнул вас.\n[C]4. !say — Пересказывает сообщение.\n[C]5. имя_бота — Позовите бота, если хотите.\n[C]6. !code — Это команда подскажет, что это.\n[C]7. !saycontent — Пересказывает ваше сообщение в контексном виде.\n[C]8. !infobot — Информация о боте.", chatId=chatId, replyTo=id)
 	if content[0] == "!гс":
 		myobj = gTTS(text=data.message.content[4:], lang='ru', slow=False)
 		myobj.save("gs.mp3")
@@ -80,7 +86,7 @@ def on_message(data):
 		sub_client.activity_status('offline')
 	if content[0] == "!say":
 		sub_client.send_message(message=(f"{data.message.content[4:]}"), chatId=chatId) # Тоже бесполезная команда. 
-	if content[0] == "имя_бота":
+	if content[0] == "Васяныч":
 		sub_client.send_message(message=(f"Звали, {nickname}?"), chatId=chatId, replyTo=id)  # Зовëт бота. :/
 	if content[0] == "Привет":
 		sub_client.send_message(message='И тебе привет', chatId=chatId, replyTo=id)
@@ -171,14 +177,11 @@ def on_message(data):
 	if data.message.content != None and data.message.type in [1, 50, 57, 59, 100, 101, 102, 103, 104, 105, 106, 107, 109, 110, 113, 114, 115, 116, 124, 125, 126]:
 		sub_client.send_message(message=(f'Рейдер {nickname} был кикнут из чата навсегда.'), chatId=data.message.chatId)
 		sub_client.kick(userId=data.message.author.userId, chatId=data.message.chatId, allowRejoin = False)
-	if data.message.type == 101 and nom == 0 and data.message.content == None:
-		sub_client.send_message(message='{nickname} пытался зарейдить.', chatId=data.message.chatId)
-		sub_client.kick(userId=data.message.author.userId, chatId=data.message.chatId, allowRejoin = False)
 		nom = 0
 
 methods = []
-for x in client.callbacks.chat_methods:
-	methods.append(client.callbacks.event(client.callbacks.chat_methods[x].__name__)(on_message))
+for x in client.chat_methods:
+	methods.append(client.event(client.chat_methods[x].__name__)(on_message))
 
         
 
