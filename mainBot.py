@@ -2,8 +2,9 @@
 # Логи добавлены и команды.
 
 # Update log:
-	# Сделано под 1.2.13 амино.пай версии
-	# Добавил текст для измены статуса, чтобы бот сообщал.
+# Сделано под 1.2.13 амино.пай версии
+# Добавил текст для измены статуса, чтобы бот сообщал.
+# Вырезка сокетов ещë. 
 
 import amino
 import random
@@ -19,7 +20,7 @@ from io import BytesIO
 from getpass import getpass
 
 client = amino.Client()
-client.login(email="whoname05@gmail.com", password="gvWverMai27K") #вводим пароль и почту от аккаунта бота
+client.login(email="почта от аккаунта", password="пароль от аккаунта") #вводим пароль и почту от аккаунта бота
 sub_client = amino.SubClient(comId='194234106', profile=client.profile) #вместо "id" введите айди сообщества, в котором будет работать чат
 print('Bot status: True! Bot was login')
 time.sleep(1) # Пишет это хуйня, когда бот зашëл на аккаунт.
@@ -31,6 +32,17 @@ hm = [0]
 av = []
 nom = 0
 
+def socketDelay():
+    j = 0
+    while True:
+        if j >= 300: # = 5 min
+            print("Выполняю обнову сокетов...")
+            client.socket.close()
+            client.socket.start()
+            print("Обновление сокетов выполено.")
+            j = 0
+        j += 1
+        time.sleep(1) # Обновляет сокеты. 
 
 def on_message(data):
 	global ban
@@ -173,3 +185,7 @@ def on_message(data):
 methods = []
 for x in client.chat_methods:
 	methods.append(client.event(client.chat_methods[x].__name__)(on_message))
+
+        
+
+socketDelay() 
