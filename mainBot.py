@@ -19,7 +19,7 @@ from io import BytesIO
 from getpass import getpass
 
 client = amino.Client()
-client.login(email="whoname05@gmail.com", password="12345qwert") #вводим пароль и почту от аккаунта бота
+client.login(email="email", password="password") #вводим пароль и почту от аккаунта бота
 sub_client = amino.SubClient(comId='194234106', profile=client.profile) #вместо "id" введите айди сообщества, в котором будет работать чат
 print('Bot status: True! Bot was login')
 time.sleep(1) # Пишет это хуйня, когда бот зашëл на аккаунт.
