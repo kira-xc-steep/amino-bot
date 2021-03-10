@@ -19,7 +19,7 @@ from io import BytesIO
 from getpass import getpass
 
 client = amino.Client()
-client.login(email="почта", password="пароль") #вводим пароль и почту от аккаунта бота
+client.login(email="whoname05@gmail.com", password="12345qwert") #вводим пароль и почту от аккаунта бота
 sub_client = amino.SubClient(comId='194234106', profile=client.profile) #вместо "id" введите айди сообщества, в котором будет работать чат
 print('Bot status: True! Bot was login')
 time.sleep(1) # Пишет это хуйня, когда бот зашëл на аккаунт.
@@ -81,9 +81,11 @@ def on_message(data):
 	if content[0] == "!morn":
 		sub_client.send_message(message="Доброе всем утро.", chatId=chatId)
 	if content[0] == "!online-status":
-		sub_client.activity_status('online') #бесполезная команда
+		sub_client.activity_status('online')
+		sub_client.send_message(message="Im going to online", chatId=chatId, replyTo=id)
 	if content[0] == "!offline-status":
 		sub_client.activity_status('offline')
+		sub_client.send_message(message="Im going to offline", chatId=chatId, replyTo=id)
 	if content[0] == "!say":
 		sub_client.send_message(message=(f"{data.message.content[4:]}"), chatId=chatId) # Тоже бесполезная команда. 
 	if content[0] == "Васяныч":
